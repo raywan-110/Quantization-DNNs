@@ -2,7 +2,7 @@
 
 simulate [TensorFlow Lite](https://arxiv.org/abs/1712.05877) with PyTorch API  
 reference: <https://www.zhihu.com/people/xu-yong-zhe-65/posts>  
-Since we just use Pytorch API to implement INT8 quantization, we cannot obtain the speed-up effect proposed in the paper, but just simulate the influence brought be the quantization operation.
+Since I just use Pytorch API to implement INT8 quantization, I cannot obtain the speed-up effect proposed in the paper, but just simulate the influence brought be the quantization operation.
 - - -
 
 ## Usage
