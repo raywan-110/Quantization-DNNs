@@ -19,11 +19,11 @@ def load_data_fashion_mnist(batch_size, resize=None):
     return (torch.utils.data.DataLoader(mnist_train,
                                         batch_size,
                                         shuffle=True,
-                                        num_workers=4),
+                                        num_workers=1),
             torch.utils.data.DataLoader(mnist_test,
                                         batch_size,
                                         shuffle=False,
-                                        num_workers=4))
+                                        num_workers=1))
 
 def load_data_cifar10(batch_size):
     """download Fashion-MNIST dataset, then load into memory"""

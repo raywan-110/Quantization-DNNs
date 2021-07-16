@@ -1,7 +1,7 @@
 import torch
 import torch.optim as optim
 import os
-from Net import CIFAR10_Net, MNIST_Net, MNIST_NetBN
+from Net import CIFAR10_Net, MNIST_Net, MNIST_NetBN, CIFAR10_NetBN
 from utils import load_data_fashion_mnist, load_data_cifar10
 
 def train(model, device, train_loader, optimizer, epoch):
@@ -40,11 +40,11 @@ def test(model, device, test_loader):
 
 
 if __name__ == '__main__':
-    dataset = 'fmnist'
+    dataset = 'cifar10'
     batch_size = 64
     test_batch_size = 64
     seed = 1
-    epochs = 15
+    epochs = 8
     lr = 0.001
     save_model = True
     use_bn = True
@@ -52,7 +52,10 @@ if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     if dataset == 'cifar10':
         train_iter, test_iter = load_data_cifar10(batch_size=batch_size)
-        model = CIFAR10_Net(num_channels=3)
+        if use_bn:
+            model = CIFAR10_NetBN(num_channels=3)
+        else:
+            model = CIFAR10_Net(num_channels=3)
     else:
         train_iter, test_iter = load_data_fashion_mnist(batch_size=batch_size)
         if use_bn:
@@ -65,10 +68,11 @@ if __name__ == '__main__':
     for epoch in range(1, epochs + 1):
         train(model, device, train_iter, optimizer, epoch)
         test(model, device, test_iter)
+
     if save_model:
         if not os.path.exists('ckpt'):
             os.makedirs('ckpt')
         if use_bn:
-            torch.save(model.state_dict(), 'ckpt/mnistBN_cnn.pt')
+            torch.save(model.state_dict(), 'ckpt/cifar10_cnnBN.pt')
         else:
-            torch.save(model.state_dict(), 'ckpt/mnist_cnn.pt')
+            torch.save(model.state_dict(), 'ckpt/cifar10_cnn.pt')
