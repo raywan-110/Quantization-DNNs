@@ -38,7 +38,7 @@ if __name__ == '__main__':
     seed = 4
     epochs = 3
     momentum = 0.5
-    lr = 0.000008
+    lr = 0.03
     from_scratch = False
     use_bn = True
     bit = 8
